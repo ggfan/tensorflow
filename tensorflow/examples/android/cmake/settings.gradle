@@ -1,0 +1,6 @@
+include ':app'
+
+include ':Tensorflow-Android-Inference'
+findProject(":Tensorflow-Android-Inference").projectDir = new File('../../../contrib/android/cmake')
+
+

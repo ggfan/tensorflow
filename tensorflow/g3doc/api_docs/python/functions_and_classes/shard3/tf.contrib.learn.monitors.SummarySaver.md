@@ -1,7 +1,7 @@
 Saves summaries every N steps.
 - - -
 
-#### `tf.contrib.learn.monitors.SummarySaver.__init__(summary_op, save_steps=100, output_dir=None, summary_writer=None)` {#SummarySaver.__init__}
+#### `tf.contrib.learn.monitors.SummarySaver.__init__(summary_op, save_steps=100, output_dir=None, summary_writer=None, scaffold=None)` {#SummarySaver.__init__}
 
 Initializes a `SummarySaver` monitor.
 
@@ -9,13 +9,14 @@ Initializes a `SummarySaver` monitor.
 
 
 *  <b>`summary_op`</b>: `Tensor` of type `string`. A serialized `Summary` protocol
-      buffer, as output by TF summary methods like `scalar_summary` or
-      `merge_all_summaries`.
+      buffer, as output by TF summary methods like `summary.scalar` or
+      `summary.merge_all`.
 *  <b>`save_steps`</b>: `int`, save summaries every N steps. See `EveryN`.
 *  <b>`output_dir`</b>: `string`, the directory to save the summaries to. Only used
       if no `summary_writer` is supplied.
 *  <b>`summary_writer`</b>: `SummaryWriter`. If `None` and an `output_dir` was passed,
       one will be created accordingly.
+*  <b>`scaffold`</b>: `Scaffold` to get summary_op if it's not provided.
 
 
 - - -
