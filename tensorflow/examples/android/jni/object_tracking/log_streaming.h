@@ -16,21 +16,22 @@ limitations under the License.
 #ifndef THIRD_PARTY_TENSORFLOW_EXAMPLES_ANDROID_JNI_OBJECT_TRACKING_LOG_STREAMING_H_
 #define THIRD_PARTY_TENSORFLOW_EXAMPLES_ANDROID_JNI_OBJECT_TRACKING_LOG_STREAMING_H_
 
+#include <android/log.h>
+
 #include <string.h>
 #include <string>
 
-#include "tensorflow/core/lib/strings/stringprintf.h"
-#include "tensorflow/core/platform/logging.h"
-
-using namespace tensorflow;
-
 namespace tf_tracking {
 
-#define LOGV(...)
-#define LOGD(...)
-#define LOGI(...) LOG(INFO) << tensorflow::strings::Printf(__VA_ARGS__);
-#define LOGW(...) LOG(INFO) << tensorflow::strings::Printf(__VA_ARGS__);
-#define LOGE(...) LOG(INFO) << tensorflow::strings::Printf(__VA_ARGS__);
+#if 0
+  #define MODULE_NAME  "TF_TRACKING"
+  #define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, MODULE_NAME, __VA_ARGS__)
+  #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, MODULE_NAME, __VA_ARGS__)
+  #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, MODULE_NAME, __VA_ARGS__)
+  #define LOGW(...) __android_log_print(ANDROID_LOG_WARN,MODULE_NAME, __VA_ARGS__)
+  #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,MODULE_NAME, __VA_ARGS__)
+  #define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,MODULE_NAME, __VA_ARGS__)
+#endif
 
 }  // namespace tf_tracking
 

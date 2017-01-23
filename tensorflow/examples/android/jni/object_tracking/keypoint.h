@@ -16,6 +16,8 @@ limitations under the License.
 #ifndef THIRD_PARTY_TENSORFLOW_EXAMPLES_ANDROID_JNI_OBJECT_TRACKING_KEYPOINT_H_
 #define THIRD_PARTY_TENSORFLOW_EXAMPLES_ANDROID_JNI_OBJECT_TRACKING_KEYPOINT_H_
 
+#include <iostream>
+
 #include "tensorflow/examples/android/jni/object_tracking/geom.h"
 #include "tensorflow/examples/android/jni/object_tracking/image-inl.h"
 #include "tensorflow/examples/android/jni/object_tracking/image.h"
@@ -35,7 +37,7 @@ struct Keypoint {
 
   Point2f pos_;
   float score_;
-  uint8 type_;
+  uint8_t type_;
 };
 
 inline std::ostream& operator<<(std::ostream& stream, const Keypoint keypoint) {

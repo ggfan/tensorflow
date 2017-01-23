@@ -21,6 +21,9 @@ limitations under the License.
 #endif
 #include "tensorflow/examples/android/jni/object_tracking/object_detector.h"
 
+// TODO(gfan) look at it
+#include  "common.h"
+
 namespace tf_tracking {
 
 // A TrackedObject is a specific instance of an ObjectModel, with a known
@@ -32,14 +35,14 @@ namespace tf_tracking {
 class TrackedObject {
  public:
   TrackedObject(const std::string& id,
-                const Image<uint8>& image,
+                const Image<uint8_t>& image,
                 const BoundingBox& bounding_box,
                 ObjectModelBase* const model);
 
   ~TrackedObject();
 
   void UpdatePosition(const BoundingBox& new_position,
-                      const int64 timestamp,
+                      const int64_t timestamp,
                       const ImageData& image_data,
                       const bool authoratative);
 
@@ -49,7 +52,7 @@ class TrackedObject {
   void OnDetection(ObjectModelBase* const model,
                    const BoundingBox& detection_position,
                    const MatchScore match_score,
-                   const int64 timestamp,
+                   const int64_t timestamp,
                    const ImageData& image_data);
 
   // Called when there's no detection of the tracked object. This will cause
@@ -123,7 +126,7 @@ class TrackedObject {
   }
 
   // Get current object's num_consecutive_frames_below_threshold_.
-  inline int64 GetNumConsecutiveFramesBelowThreshold() {
+  inline int64_t GetNumConsecutiveFramesBelowThreshold() {
     return num_consecutive_frames_below_threshold_;
   }
 
@@ -148,7 +151,7 @@ class TrackedObject {
   BoundingBox last_detection_position_;
 
   // When the position was last computed.
-  int64 position_last_computed_time_;
+  int64_t position_last_computed_time_;
 
   // The object model this tracked object is representative of.
   ObjectModelBase* object_model_;

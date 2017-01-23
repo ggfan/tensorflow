@@ -27,10 +27,16 @@ limitations under the License.
 #include <sys/time.h>
 #endif  // ifdef HAVE_CLOCK_GETTIME
 
-#include "tensorflow/core/platform/logging.h"
-#include "tensorflow/core/platform/types.h"
+#include <stdint.h>
+#include <android/log.h>
 
-using namespace tensorflow;
+#define MODULE_NAME  "Tensorflow-Demo"
+#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, MODULE_NAME, __VA_ARGS__)
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, MODULE_NAME, __VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, MODULE_NAME, __VA_ARGS__)
+#define LOGW(...) __android_log_print(ANDROID_LOG_WARN,MODULE_NAME, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,MODULE_NAME, __VA_ARGS__)
+#define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,MODULE_NAME, __VA_ARGS__)
 
 // TODO(andrewharp): clean up these macros to use the codebase statndard.
 
@@ -88,7 +94,7 @@ using namespace tensorflow;
 
 
 
-inline static int64 CurrentThreadTimeNanos() {
+inline static int64_t CurrentThreadTimeNanos() {
 #ifdef HAVE_CLOCK_GETTIME
   struct timespec tm;
   clock_gettime(CLOCK_THREAD_CPUTIME_ID, &tm);
@@ -101,7 +107,7 @@ inline static int64 CurrentThreadTimeNanos() {
 }
 
 
-inline static int64 CurrentRealTimeMillis() {
+inline static int64_t CurrentRealTimeMillis() {
 #ifdef HAVE_CLOCK_GETTIME
   struct timespec tm;
   clock_gettime(CLOCK_MONOTONIC, &tm);
@@ -184,16 +190,16 @@ static inline float randf(const float min_value, const float max_value) {
   return randf() * (max_value - min_value) + min_value;
 }
 
-static inline uint16 RealToFixed115(const float real_number) {
+static inline uint16_t RealToFixed115(const float real_number) {
   SCHECK(InRange(real_number, 0.0f, 2048.0f),
         "Value out of range! %.2f", real_number);
 
   static const float kMult = 32.0f;
   const float round_add = (real_number > 0.0f) ? 0.5f : -0.5f;
-  return static_cast<uint16>(real_number * kMult + round_add);
+  return static_cast<uint16_t>(real_number * kMult + round_add);
 }
 
-static inline float FixedToFloat115(const uint16 fp_number) {
+static inline float FixedToFloat115(const uint16_t fp_number) {
   const float kDiv = 32.0f;
   return (static_cast<float>(fp_number) / kDiv);
 }
@@ -333,7 +339,7 @@ inline float ComputeCrossCorrelation(const float* const values1,
 inline void NormalizeNumbers(float* const values, const int num_vals) {
   // Find the mean and then subtract so that the new mean is 0.0.
   const float mean = ComputeMean(values, num_vals);
-  VLOG(2) << "Mean is " << mean;
+  LOGV("Mean is %f", mean);
   float* curr_data = values;
   for (int i = 0; i < num_vals; ++i) {
     *curr_data -= mean;
@@ -345,7 +351,7 @@ inline void NormalizeNumbers(float* const values, const int num_vals) {
   // so only scale by the standard deviation if this is not the case.
   const float std_dev = ComputeStdDev(values, num_vals, 0.0f);
   if (std_dev > 0.0f) {
-    VLOG(2) << "Std dev is " << std_dev;
+    LOGV("Std dev is %f", std_dev);
     curr_data = values;
     for (int i = 0; i < num_vals; ++i) {
       *curr_data /= std_dev;

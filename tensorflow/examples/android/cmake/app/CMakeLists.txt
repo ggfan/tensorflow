@@ -22,6 +22,7 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 get_filename_component(TF_SRC_ROOT ${CMAKE_SOURCE_DIR}/../../../../..  ABSOLUTE)
 get_filename_component(SAMPLE_SRC_DIR  ${CMAKE_SOURCE_DIR}/../..  ABSOLUTE)
 include_directories(${TF_SRC_ROOT})
+include_directories(${CMAKE_SOURCE_DIR}/../common/include)
 
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY")
