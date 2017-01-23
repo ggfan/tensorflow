@@ -20,7 +20,6 @@ limitations under the License.
 
 #include "tensorflow/examples/android/jni/object_tracking/geom.h"
 #include "tensorflow/examples/android/jni/object_tracking/utils.h"
-#include "common.h"
 
 // TODO(andrewharp): Make this a cast to uint32_t if/when we go unsigned for
 // operations.

@@ -23,6 +23,9 @@ limitations under the License.
 #include "tensorflow/examples/android/jni/object_tracking/image.h"
 #include "tensorflow/examples/android/jni/object_tracking/utils.h"
 
+#include "logging.h"
+using namespace tensorflow;
+
 namespace tf_tracking {
 
 inline void GetUV(
@@ -198,8 +201,7 @@ inline float ImageCrossCorrelation(const Image<float>& image1,
 inline void CopyArea(const Image<uint8_t>& image,
                      const BoundingBox& area_to_copy,
                      Image<float>* const patch_image) {
-  // Gfan: to follow up later
-  // VLOG(2) << "Copying from: " << area_to_copy << std::endl;
+  VLOG(2) << "Copying from: " << area_to_copy << std::endl;
 
   const int patch_width = patch_image->GetWidth();
   const int patch_height = patch_image->GetHeight();

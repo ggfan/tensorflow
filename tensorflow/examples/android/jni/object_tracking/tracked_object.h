@@ -21,8 +21,6 @@ limitations under the License.
 #endif
 #include "tensorflow/examples/android/jni/object_tracking/object_detector.h"
 
-// TODO(gfan) look at it
-#include  "common.h"
 
 namespace tf_tracking {
 
