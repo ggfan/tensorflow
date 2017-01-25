@@ -23,16 +23,14 @@ get_filename_component(TF_SRC_ROOT ${CMAKE_SOURCE_DIR}/../../../../..  ABSOLUTE)
 get_filename_component(SAMPLE_SRC_DIR  ${CMAKE_SOURCE_DIR}/../..  ABSOLUTE)
 include_directories(${TF_SRC_ROOT})
 
-include_directories(${CMAKE_SOURCE_DIR}/../common/platform)
-
+include_directories(${CMAKE_SOURCE_DIR}/../..)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--allow-multiple-definition -Wl,--whole-archive")
 
 file(GLOB_RECURSE tensorflow_demo_sources ${SAMPLE_SRC_DIR}/jni/*.*)
 add_library(tensorflow_demo SHARED
-            ${tensorflow_demo_sources}
-            ${CMAKE_SOURCE_DIR}/../common/platform/default/)
+            ${tensorflow_demo_sources})
 
 target_link_libraries(tensorflow_demo
                          android

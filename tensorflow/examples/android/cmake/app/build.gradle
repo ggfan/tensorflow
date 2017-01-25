@@ -81,6 +81,7 @@ project.afterEvaluate {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    debugCompile project(path: ':Tensorflow-Android-Inference', configuration: 'debug')
-    releaseCompile project(path: ':Tensorflow-Android-Inference', configuration: 'release')
+    compile project(':Tensorflow-Android-Inference-debug')
+//    debugCompile project(path: ':Tensorflow-Android-Inference', configuration: 'debug')
+//    releaseCompile project(path: ':Tensorflow-Android-Inference', configuration: 'release')
 }

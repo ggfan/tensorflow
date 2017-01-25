@@ -23,7 +23,7 @@ limitations under the License.
 #include "tensorflow/examples/android/jni/object_tracking/image.h"
 #include "tensorflow/examples/android/jni/object_tracking/utils.h"
 
-#include "logging.h"
+#include "common/platform/logging.h"
 using namespace tensorflow;
 
 namespace tf_tracking {
