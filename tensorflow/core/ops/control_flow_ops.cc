@@ -15,18 +15,38 @@ limitations under the License.
 
 #include "tensorflow/core/framework/common_shape_fns.h"
 #include "tensorflow/core/framework/op.h"
+#include "tensorflow/core/framework/shape_inference.h"
 
 namespace tensorflow {
 
 using shape_inference::InferenceContext;
+using shape_inference::ShapeHandle;
 
 // --------------------------------------------------------------------------
+namespace {
+Status SwitchShape(InferenceContext* c) {
+  ShapeHandle unused;
+  TF_RETURN_IF_ERROR(c->WithRank(c->input(1), 0, &unused));
+  ShapeHandle out = c->input(0);
+  c->set_output(0, out);
+  c->set_output(1, out);
+
+  // Handle resource shape / dtype.
+  c->set_output_handle_shape(0, c->input_handle_shape(0));
+  c->set_output_handle_shape(1, c->input_handle_shape(0));
+  c->set_output_handle_dtype(0, c->input_handle_dtype(0));
+  c->set_output_handle_dtype(1, c->input_handle_dtype(0));
+  return Status::OK();
+}
+}  // namespace
+
 REGISTER_OP("Switch")
     .Input("data: T")
     .Input("pred: bool")
     .Output("output_false: T")
     .Output("output_true: T")
     .Attr("T: type")
+    .SetShapeFn(SwitchShape)
     .Doc(R"doc(
 Forwards `data` to the output port determined by `pred`.
 
@@ -41,7 +61,6 @@ output_false: If `pred` is false, data will be forwarded to this output.
 output_true: If `pred` is true, data will be forwarded to this output.
 )doc");
 
-// --------------------------------------------------------------------------
 REGISTER_OP("RefSwitch")
     .Input("data: Ref(T)")
     .Input("pred: bool")
@@ -49,6 +68,7 @@ REGISTER_OP("RefSwitch")
     .Output("output_true: Ref(T)")
     .Attr("T: type")
     .SetAllowsUninitializedInput()
+    .SetShapeFn(SwitchShape)
     .Doc(R"doc(
 Forwards the ref tensor `data` to the output port determined by `pred`.
 
@@ -70,6 +90,26 @@ REGISTER_OP("RefSelect")
     .Output("output: Ref(T)")
     .Attr("T: type")
     .Attr("N: int >= 1")
+    .SetShapeFn([](InferenceContext* c) {
+      ShapeHandle unused;
+      TF_RETURN_IF_ERROR(c->WithRank(c->input(0), 0, &unused));
+      ShapeHandle first_input = c->input(1);
+      if (!c->FullyDefined(first_input)) {
+        c->set_output(0, c->UnknownShape());
+        return Status::OK();
+      }
+      // If any inputs aren't fully defined or don't match, we return unknown.
+      for (int i = 2; i < c->num_inputs(); ++i) {
+        ShapeHandle input = c->input(i);
+        if (!c->FullyDefined(input) ||
+            !c->Merge(first_input, input, &unused).ok()) {
+          c->set_output(0, c->UnknownShape());
+          return Status::OK();
+        }
+      }
+      c->set_output(0, first_input);
+      return Status::OK();
+    })
     .Doc(R"doc(
 Forwards the `index`th element of `inputs` to `output`.
 
@@ -79,12 +119,40 @@ output: The forwarded tensor.
 )doc");
 
 // --------------------------------------------------------------------------
+namespace {
+Status MergeShape(InferenceContext* c) {
+  ShapeHandle out = c->input(0);
+  if (!c->RankKnown(out)) {
+    out = c->UnknownShape();
+  } else {
+    int32 rank = c->Rank(out);
+    for (int i = 1; i < c->num_inputs(); ++i) {
+      ShapeHandle input = c->input(i);
+      if (!c->RankKnown(input) || c->Rank(input) != rank) {
+        out = c->UnknownShape();
+        break;
+      }
+
+      for (int d = 0; d < rank; ++d) {
+        if (c->Value(c->Dim(input, d)) != c->Value(c->Dim(out, d))) {
+          TF_RETURN_IF_ERROR(c->ReplaceDim(out, d, c->UnknownDim(), &out));
+        }
+      }
+    }
+  }
+  c->set_output(0, out);
+  c->set_output(1, c->Scalar());
+  return Status::OK();
+}
+}  // namespace
+
 REGISTER_OP("Merge")
     .Input("inputs: N * T")
     .Output("output: T")
     .Output("value_index: int32")
     .Attr("T: type")
     .Attr("N: int >= 1")
+    .SetShapeFn(MergeShape)
     .Doc(R"doc(
 Forwards the value of an available tensor from `inputs` to `output`.
 
@@ -93,8 +161,6 @@ It is usually combined with `Switch` to implement branching.
 
 `Merge` forwards the first tensor for become available to `output`, and sets
 `value_index` to its index in `inputs`.
-
-It is an error if more than one tensor in `inputs` is available.
 
 inputs: The input tensors, exactly one of which will become available.
 output: Will be set to the available input tensor.
@@ -107,6 +173,7 @@ REGISTER_OP("RefMerge")
     .Output("value_index: int32")
     .Attr("T: type")
     .Attr("N: int >= 1")
+    .SetShapeFn(MergeShape)
     .Doc(R"doc(
 Forwards the value of an available tensor from `inputs` to `output`.
 
@@ -115,8 +182,6 @@ It is usually combined with `Switch` to implement branching.
 
 `Merge` forwards the first tensor for become available to `output`, and sets
 `value_index` to its index in `inputs`.
-
-It is an error if more than one tensor in `inputs` is available.
 
 inputs: The input tensors, exactly one of which will become available.
 output: Will be set to the available input tensor.
@@ -131,7 +196,7 @@ REGISTER_OP("Enter")
     .Attr("frame_name: string")
     .Attr("is_constant: bool = false")
     .Attr("parallel_iterations: int = 10")
-    .SetShapeFn(shape_inference::UnchangedShape)
+    .SetShapeFn(shape_inference::UnknownShape)
     .Doc(R"doc(
 Creates or finds a child frame, and makes `data` available to the child frame.
 
@@ -255,9 +320,10 @@ Only useful as a placeholder for control edges.
 // --------------------------------------------------------------------------
 REGISTER_OP("Abort")
     .Attr("error_msg: string = ''")
+    .Attr("exit_without_error: bool = false")
     .SetShapeFn(shape_inference::NoOutputs)
     .Doc(R"doc(
-Raise a exception to abort the process when called.
+Raise a exception to abort the process when called. If exit_without_error is true, the process will exit normally, otherwise it will exit with a SIGABORT signal.
 
 Returns nothing but an exception.
 

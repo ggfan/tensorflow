@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ from __future__ import print_function
 
 from tensorflow.contrib.learn.python.learn.dataframe import series
 from tensorflow.contrib.learn.python.learn.dataframe import transform
-from tensorflow.python.framework import ops
+from tensorflow.python.framework import sparse_tensor
 from tensorflow.python.ops import math_ops
 
 # Each entry is a mapping from registered_name to operation. Each operation is
@@ -31,7 +31,7 @@ BINARY_TRANSFORMS = [("__eq__", math_ops.equal),
                      ("__ge__", math_ops.greater_equal),
                      ("__lt__", math_ops.less),
                      ("__le__", math_ops.less_equal),
-                     ("__mul__", math_ops.mul),
+                     ("__mul__", math_ops.multiply),
                      ("__div__", math_ops.div),
                      ("__truediv__", math_ops.truediv),
                      ("__floordiv__", math_ops.floordiv),
@@ -42,7 +42,7 @@ _DOC_FORMAT_STRING = ("A `Transform` that wraps `{0}`. "
                       "Documentation for `{0}`: \n\n {1}")
 
 
-class SeriesBinaryTransform(transform.Transform):
+class SeriesBinaryTransform(transform.TensorFlowTransform):
   """Parent class for `Transform`s that operate on two `Series`."""
 
   @property
@@ -53,10 +53,10 @@ class SeriesBinaryTransform(transform.Transform):
   def _output_names(self):
     return "output",
 
-  def _apply_transform(self, input_tensors):
+  def _apply_transform(self, input_tensors, **kwargs):
     # TODO(jamieas): consider supporting sparse inputs.
-    if isinstance(input_tensors[0], ops.SparseTensor) or isinstance(
-        input_tensors[1], ops.SparseTensor):
+    if isinstance(input_tensors[0], sparse_tensor.SparseTensor) or isinstance(
+        input_tensors[1], sparse_tensor.SparseTensor):
       raise TypeError("{} does not support SparseTensors".format(
           type(self).__name__))
 
@@ -64,7 +64,7 @@ class SeriesBinaryTransform(transform.Transform):
     return self.return_type(self._apply_op(input_tensors[0], input_tensors[1]))
 
 
-class ScalarBinaryTransform(transform.Transform):
+class ScalarBinaryTransform(transform.TensorFlowTransform):
   """Parent class for `Transform`s that combine `Series` to a scalar."""
 
   def __init__(self, scalar):
@@ -87,12 +87,12 @@ class ScalarBinaryTransform(transform.Transform):
   def _output_names(self):
     return "output",
 
-  def _apply_transform(self, input_tensors):
+  def _apply_transform(self, input_tensors, **kwargs):
     input_tensor = input_tensors[0]
-    if isinstance(input_tensor, ops.SparseTensor):
-      result = ops.SparseTensor(input_tensor.indices,
-                                self._apply_op(input_tensor.values),
-                                input_tensor.shape)
+    if isinstance(input_tensor, sparse_tensor.SparseTensor):
+      result = sparse_tensor.SparseTensor(input_tensor.indices,
+                                          self._apply_op(input_tensor.values),
+                                          input_tensor.dense_shape)
     else:
       result = self._apply_op(input_tensor)
 

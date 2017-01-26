@@ -23,6 +23,7 @@ from __future__ import print_function
 
 import os
 import socket
+from werkzeug import serving
 
 from tensorflow.python.platform import app
 from tensorflow.python.platform import flags
@@ -30,10 +31,10 @@ from tensorflow.python.platform import resource_loader
 from tensorflow.python.platform import status_bar
 from tensorflow.python.platform import tf_logging as logging
 from tensorflow.python.summary import event_file_inspector as efi
-from tensorflow.python.summary import event_multiplexer
-from tensorflow.tensorboard.backend import server
+from tensorflow.tensorboard.backend import application
+from tensorflow.tensorboard.plugins.projector import plugin as projector_plugin
 
-flags.DEFINE_string('logdir', None, """logdir specifies the directory where
+flags.DEFINE_string('logdir', '', """logdir specifies the directory where
 TensorBoard will look to find TensorFlow event files that it can display.
 TensorBoard will recursively walk the directory structure rooted at logdir,
 looking for .*tfevents.* files.
@@ -45,8 +46,9 @@ directories by putting a colon between the name and the path, as in
 tensorboard --logdir=name1:/path/to/logs/1,name2:/path/to/logs/2
 """)
 
-flags.DEFINE_boolean('debug', False, 'Whether to run the app in debug mode. '
-                     'This increases log verbosity to DEBUG.')
+flags.DEFINE_boolean(
+    'insecure_debug_mode', False, 'Whether to run the app in debug mode. '
+    'This increases log verbosity, and enables debugging on server exceptions.')
 
 flags.DEFINE_string('host', '0.0.0.0', 'What host to listen to. Defaults to '
                     'serving on 0.0.0.0, set to 127.0.0.1 (localhost) to'
@@ -87,18 +89,19 @@ FLAGS = flags.FLAGS
 
 
 def main(unused_argv=None):
-  if FLAGS.debug:
+  debug = FLAGS.insecure_debug_mode
+  logdir = os.path.expanduser(FLAGS.logdir)
+  if debug:
     logging.set_verbosity(logging.DEBUG)
-    logging.info('TensorBoard is in debug mode.')
+    logging.warning('TensorBoard is in debug mode. This is NOT SECURE.')
 
   if FLAGS.inspect:
     logging.info('Not bringing up TensorBoard, but inspecting event files.')
-    efi.inspect(logdir=FLAGS.logdir,
-                event_file=FLAGS.event_file,
-                tag=FLAGS.tag)
+    event_file = os.path.expanduser(FLAGS.event_file)
+    efi.inspect(logdir, event_file, FLAGS.tag)
     return 0
 
-  if not FLAGS.logdir:
+  if not logdir:
     msg = ('A logdir must be specified. Run `tensorboard --help` for '
            'details and examples.')
     logging.error(msg)
@@ -106,16 +109,42 @@ def main(unused_argv=None):
     return -1
 
   logging.info('Starting TensorBoard in directory %s', os.getcwd())
-  path_to_run = server.ParseEventFilesSpec(FLAGS.logdir)
-  logging.info('TensorBoard path_to_run is: %s', path_to_run)
 
-  multiplexer = event_multiplexer.EventMultiplexer(
-      size_guidance=server.TENSORBOARD_SIZE_GUIDANCE,
-      purge_orphaned_data=FLAGS.purge_orphaned_data)
-  server.StartMultiplexerReloadingThread(multiplexer, path_to_run,
-                                         FLAGS.reload_interval)
+  plugins = {'projector': projector_plugin.ProjectorPlugin()}
+  tb_app = application.TensorBoardWSGIApp(
+      logdir,
+      plugins,
+      purge_orphaned_data=FLAGS.purge_orphaned_data,
+      reload_interval=FLAGS.reload_interval)
+
   try:
-    tb_server = server.BuildServer(multiplexer, FLAGS.host, FLAGS.port)
+    tag = resource_loader.load_resource('tensorboard/TAG').strip()
+    logging.info('TensorBoard is tag: %s', tag)
+  except IOError:
+    logging.info('Unable to read TensorBoard tag')
+    tag = ''
+
+  status_bar.SetupStatusBarInsideGoogle('TensorBoard %s' % tag, FLAGS.port)
+  print('Starting TensorBoard %s on port %d' % (tag, FLAGS.port))
+
+  if FLAGS.host == "0.0.0.0":
+    try:
+      host = socket.gethostbyname(socket.gethostname())
+      print('(You can navigate to http://%s:%d)' % (host, FLAGS.port))
+    except socket.gaierror:
+      pass
+  else:
+    print('(You can navigate to http://%s:%d)' % (FLAGS.host, FLAGS.port))
+
+  try:
+    serving.run_simple(
+        FLAGS.host,
+        FLAGS.port,
+        tb_app,
+        threaded=True,
+        use_reloader=debug,
+        use_evalex=debug,
+        use_debugger=debug)
   except socket.error:
     if FLAGS.port == 0:
       msg = 'Unable to find any open ports.'
@@ -127,18 +156,6 @@ def main(unused_argv=None):
       logging.error(msg)
       print(msg)
       return -3
-
-  try:
-    tag = resource_loader.load_resource('tensorboard/TAG').strip()
-    logging.info('TensorBoard is tag: %s', tag)
-  except IOError:
-    logging.info('Unable to read TensorBoard tag')
-    tag = ''
-
-  status_bar.SetupStatusBarInsideGoogle('TensorBoard %s' % tag, FLAGS.port)
-  print('Starting TensorBoard %s on port %d' % (tag, FLAGS.port))
-  print('(You can navigate to http://%s:%d)' % (FLAGS.host, FLAGS.port))
-  tb_server.serve_forever()
 
 
 if __name__ == '__main__':

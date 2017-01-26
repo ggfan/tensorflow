@@ -1,4 +1,4 @@
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,18 +21,18 @@ from __future__ import print_function
 
 from tensorflow.contrib.learn.python.learn.dataframe import series
 from tensorflow.contrib.learn.python.learn.dataframe import transform
-from tensorflow.python.framework import ops
+from tensorflow.python.framework import sparse_tensor
 from tensorflow.python.ops import sparse_ops
 
 
-def _negate_sparse(sparse_tensor):
-  return ops.SparseTensor(indices=sparse_tensor.indices,
-                          values=-sparse_tensor.values,
-                          shape=sparse_tensor.shape)
+def _negate_sparse(st):
+  return sparse_tensor.SparseTensor(indices=st.indices,
+                                    values=-st.values,
+                                    dense_shape=st.dense_shape)
 
 
 @series.Series.register_binary_op("__sub__")
-class Difference(transform.Transform):
+class Difference(transform.TensorFlowTransform):
   """Subtracts one 'Series` from another."""
 
   def __init__(self):
@@ -50,9 +50,9 @@ class Difference(transform.Transform):
   def _output_names(self):
     return "output",
 
-  def _apply_transform(self, input_tensors):
-    pair_sparsity = (isinstance(input_tensors[0], ops.SparseTensor),
-                     isinstance(input_tensors[1], ops.SparseTensor))
+  def _apply_transform(self, input_tensors, **kwargs):
+    pair_sparsity = (isinstance(input_tensors[0], sparse_tensor.SparseTensor),
+                     isinstance(input_tensors[1], sparse_tensor.SparseTensor))
 
     if pair_sparsity == (False, False):
       result = input_tensors[0] - input_tensors[1]
