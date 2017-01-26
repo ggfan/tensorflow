@@ -18,7 +18,7 @@ limitations under the License.
 
 #include <memory>
 
-#include "tensorflow/core/platform/types.h"
+#include "common/platform/types.h"
 
 #include "tensorflow/examples/android/jni/object_tracking/image-inl.h"
 #include "tensorflow/examples/android/jni/object_tracking/image.h"

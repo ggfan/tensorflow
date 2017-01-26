@@ -1,0 +1,125 @@
+
+{
+	"buildFiles" : 
+	[
+		"/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/CMakeLists.txt"
+	],
+	"cleanCommands" : 
+	[
+		"/usr/local/google/home/gfan/dev/sdk/android-sdk-linux/cmake/3.6.3155560/bin/cmake --build /usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a --target clean"
+	],
+	"cppFileExtensions" : [ "cc" ],
+	"libraries" : 
+	{
+		"tensorflow_demo-Release-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "tensorflow_demo",
+			"buildCommand" : "/usr/local/google/home/gfan/dev/sdk/android-sdk-linux/cmake/3.6.3155560/bin/cmake --build /usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a --target tensorflow_demo",
+			"buildType" : "release",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/imageutils_jni.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/frame_pair.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/image_neon.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/keypoint_detector.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/object_detector.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/object_tracker.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/object_tracker_jni.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/optical_flow.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/time_log.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/tracked_object.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/utils_neon.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/rgb2yuv.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/yuv2rgb.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/common/platform/default/logging.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --sysroot=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/platforms/android-21/arch-arm  -Dtensorflow_demo_EXPORTS -I/usr/local/google/home/gfan/pproj/tensorflow -I../../../../../.. -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem /usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -Os -DNDEBUG -Os -DNDEBUG  -fPIC    -c ",
+					"src" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/common/lib/strings/stringprintf.cc",
+					"workingDirectory" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+				}
+			],
+			"output" : "/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/build/intermediates/cmake/release/obj/armeabi-v7a/libtensorflow_demo.so",
+			"toolchain" : "6051451571636472777"
+		}
+	},
+	"toolchains" : 
+	{
+		"6051451571636472777" : 
+		{
+			"cCompilerExecutable" : "/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc",
+			"cppCompilerExecutable" : "/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-g++"
+		}
+	}
+}

@@ -1,0 +1,87 @@
+// This file provides basic support for building the TensorFlow demo
+// in Android Studio with Gradle.
+//
+// Note:
+//    * Android Studio 2.2.0+ is used to compile the native libs, 
+//      native code is built with CMake support
+//    * tensor flow models is downloaded into sample's ./assets folder
+//      or could be manually download and unzip to ./assets folder:
+//       $ curl -L https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip -o /tmp/inception5h.zip
+//       $ unzip /tmp/inception5h.zip -d tensorflow/examples/android/assets/
+
+apply plugin: 'com.android.application'
+apply plugin: 'de.undercouch.download'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '25.0.0'
+
+    lintOptions {
+        abortOnError false
+    }
+
+    defaultConfig {
+        applicationId = 'com.tensorflow.demo'
+        minSdkVersion 21
+        targetSdkVersion 21
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_TOOLCHAIN=gcc', '-DANDROID_STL=gnustl_static'
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+             path 'CMakeLists.txt'
+        }
+    }
+
+    sourceSets {
+        def SRC_PREFIX='../..'
+        main {
+            manifest.srcFile "${SRC_PREFIX}/AndroidManifest.xml"
+            java.srcDirs = ["${SRC_PREFIX}/src"]
+            resources.srcDirs = ["${SRC_PREFIX}/src"]
+            aidl.srcDirs = ["${SRC_PREFIX}/src"]
+            renderscript.srcDirs = ["${SRC_PREFIX}/src"]
+            res.srcDirs = ["${SRC_PREFIX}/res"]
+            assets.srcDirs = ['./assets']
+        }
+    }
+}
+
+// Download model zip file into ../../assets directory
+// unzip it to demo project's own ./assets directory
+import de.undercouch.gradle.tasks.download.Download
+task downloadFile(type: Download) {
+    src 'https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip'
+    dest projectDir.toString() + '/../../assets/inception.zip'
+}
+task unzip(type: Copy) {
+    from zipTree(projectDir.toString() + '/../../assets/inception.zip')
+    into file(projectDir.toString() + '/assets')
+}
+unzip.dependsOn downloadFile
+
+project.afterEvaluate {
+    if (!(new File(projectDir.toString() + '/assets')).exists()) {
+        preBuild.dependsOn unzip
+    }
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':Tensorflow-Android-Inference-debug')
+//    debugCompile project(path: ':Tensorflow-Android-Inference', configuration: 'debug')
+//    releaseCompile project(path: ':Tensorflow-Android-Inference', configuration: 'release')
+}

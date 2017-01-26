@@ -19,8 +19,8 @@ limitations under the License.
 #include <string.h>
 #include <string>
 
-#include "tensorflow/core/lib/strings/stringprintf.h"
-#include "tensorflow/core/platform/logging.h"
+#include "common/lib/strings/stringprintf.h"
+#include "common/platform/logging.h"
 
 using namespace tensorflow;
 

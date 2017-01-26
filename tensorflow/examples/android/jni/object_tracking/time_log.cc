@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-#include "tensorflow/core/platform/types.h"
+#include "common/platform/types.h"
 
 #include "tensorflow/examples/android/jni/object_tracking/time_log.h"
 

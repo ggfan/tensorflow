@@ -20,7 +20,7 @@ limitations under the License.
 #include <string.h>
 #include <cstdint>
 
-#include "tensorflow/core/platform/types.h"
+#include "common/platform/types.h"
 
 #include "tensorflow/examples/android/jni/object_tracking/image-inl.h"
 #include "tensorflow/examples/android/jni/object_tracking/image.h"
