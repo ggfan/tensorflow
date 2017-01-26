@@ -27,8 +27,8 @@ limitations under the License.
 #include <sys/time.h>
 #endif  // ifdef HAVE_CLOCK_GETTIME
 
-#include "tensorflow/core/platform/logging.h"
-#include "tensorflow/core/platform/types.h"
+#include "common/platform/logging.h"
+#include "common/platform/types.h"
 
 using namespace tensorflow;
 

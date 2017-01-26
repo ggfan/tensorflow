@@ -20,7 +20,7 @@ limitations under the License.
 
 #include <arm_neon.h>
 
-#include "tensorflow/core/platform/types.h"
+#include "common/platform/types.h"
 
 #include "tensorflow/examples/android/jni/object_tracking/image-inl.h"
 #include "tensorflow/examples/android/jni/object_tracking/image.h"
