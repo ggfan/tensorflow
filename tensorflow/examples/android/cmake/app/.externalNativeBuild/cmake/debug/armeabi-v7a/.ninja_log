@@ -1,0 +1,16 @@
+# ninja log v5
+2	865	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/object_tracker_jni.cc.o	d65324c90f51d7ca
+1	225	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/imageutils_jni.cc.o	1d774982f446374e
+2	915	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/keypoint_detector.cc.o	1e52b56f8752d7f0
+2	488	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/logging.cc.o	5e9ecad60a61d3c7
+3	225	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/yuv2rgb.cc.o	fc0bc12a359e9834
+2	913	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/tracked_object.cc.o	dffc766a5dec5206
+3	225	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/rgb2yuv.cc.o	d93734e1fb9f80b1
+2	768	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/object_detector.cc.o	ab672106568e6b1a
+1	676	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/image_neon.cc.o	2046c4d65bc4b573
+1	504	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/frame_pair.cc.o	c5b34d0fd09f7b4d
+1469	1882	0	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libtensorflow_demo.so	bb6d0b91a12c2db0
+2	885	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/optical_flow.cc.o	dc2c415f8f189896
+2	411	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/time_log.cc.o	9b59cfcf08365fee
+2	1469	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/object_tracker.cc.o	ebf3901427e418e4
+2	588	0	CMakeFiles/tensorflow_demo.dir/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/jni/object_tracking/utils_neon.cc.o	17359eee4b5980f

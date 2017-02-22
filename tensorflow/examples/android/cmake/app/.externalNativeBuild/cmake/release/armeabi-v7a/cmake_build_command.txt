@@ -1,0 +1,16 @@
+Executable : /usr/local/google/home/gfan/dev/sdk_current/cmake/3.6.3155560/bin/cmake
+arguments : 
+-H/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app
+-B/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a
+-GAndroid Gradle - Ninja
+-DANDROID_ABI=armeabi-v7a
+-DANDROID_NDK=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/build/intermediates/cmake/release/obj/armeabi-v7a
+-DCMAKE_BUILD_TYPE=Release
+-DCMAKE_MAKE_PROGRAM=/usr/local/google/home/gfan/dev/sdk_current/cmake/3.6.3155560/bin/ninja
+-DCMAKE_TOOLCHAIN_FILE=/usr/local/google/home/gfan/dev/sdk_current/ndk-bundle/build/cmake/android.toolchain.cmake
+-DANDROID_PLATFORM=android-21
+-DANDROID_TOOLCHAIN=gcc
+-DANDROID_STL=gnustl_static
+jvmArgs : 
+

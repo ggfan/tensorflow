@@ -32,7 +32,7 @@ set_target_properties(lib_tf PROPERTIES IMPORTED_LOCATION
 # Change to compile flags should be replicated into bazel build file
 # LINT.IfChange
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-rtti -fno-exceptions \
-                     -fpic -O2 -mfpu=neon -DTF_LEAN_BINARY -msse4.1 \
+                     -fpic -O2 -mfpu=neon -D__ANDROID__ -DTF_LEAN_BINARY \
                      -DGOOGLE_PROTOBUF_NO_RTTI \
                      -DGOOGLE_PROTOBUF_NO_STATIC_INITIALIZER")
 # LINT.ThenChange(//tensorflow/tensorflow.bzl)
@@ -43,7 +43,16 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
 
 file(GLOB tensorflow_inference_sources
      ${CMAKE_CURRENT_SOURCE_DIR}/../jni/*.cc)
-add_library(tensorflow_inference SHARED ${tensorflow_inference_sources})
+file(GLOB java_interface_sources
+     ${TENSORFLOW_ROOT_DIR}/tensorflow/java/src/main/native/*.cc)
+set(c_api_sources ${TENSORFLOW_ROOT_DIR}/tensorflow/c/c_api.cc)
+list(REMOVE_ITEM c_api_sources ${TENSORFLOW_ROOT_DIR}/tensorflow/c/c_api_test.cc)
+
+
+add_library(tensorflow_inference SHARED
+            ${tensorflow_inference_sources}
+            ${c_api_sources}
+            ${java_interface_sources})
 
 # Include libraries needed for hello-jni lib
 target_link_libraries(tensorflow_inference

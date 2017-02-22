@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '25.0.0'
 
     // for debugging native code purpose
     publishNonDefault true
@@ -25,7 +25,10 @@ android {
     }
     sourceSets {
         main {
-            java.srcDirs =  ["../java"]
+            java {
+                srcDirs =  ["../java", "../../../java/src/main/java"]
+                exclude  'org/tensorflow/examples/**'
+            }
         }
     }
 
@@ -86,7 +89,7 @@ if(! Os.isFamily(Os.FAMILY_WINDOWS)) {
                 //    just uncomment this line to use it:
                 //    it can take long time to build by default
                 //    it is disabled to avoid false first impression
-                // task.dependsOn buildTensorflow
+                task.dependsOn buildTensorflow
             }
         }
     }
