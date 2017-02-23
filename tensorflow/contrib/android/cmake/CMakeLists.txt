@@ -46,13 +46,13 @@ file(GLOB tensorflow_inference_sources
 file(GLOB java_interface_sources
      ${TENSORFLOW_ROOT_DIR}/tensorflow/java/src/main/native/*.cc)
 set(c_api_sources ${TENSORFLOW_ROOT_DIR}/tensorflow/c/c_api.cc)
-list(REMOVE_ITEM c_api_sources ${TENSORFLOW_ROOT_DIR}/tensorflow/c/c_api_test.cc)
 
 
 add_library(tensorflow_inference SHARED
             ${tensorflow_inference_sources}
             ${c_api_sources}
-            ${java_interface_sources})
+            ${java_interface_sources}
+            ${CMAKE_CURRENT_SOURCE_DIR}/../asset_manager_filesystem.cc)
 
 # Include libraries needed for hello-jni lib
 target_link_libraries(tensorflow_inference

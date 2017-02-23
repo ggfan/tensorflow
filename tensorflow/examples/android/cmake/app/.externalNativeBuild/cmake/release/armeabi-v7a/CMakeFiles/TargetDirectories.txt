@@ -1,3 +1,0 @@
-/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/edit_cache.dir
-/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/usr/local/google/home/gfan/pproj/tensorflow/tensorflow/examples/android/cmake/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/tensorflow_demo.dir

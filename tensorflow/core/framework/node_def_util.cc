@@ -97,6 +97,10 @@ Status AttrSlice::Find(StringPiece attr_name,
   if (!StringPiece(attr_name).starts_with("_") && ndef_) {
     s = AttachDef(s, *ndef_);
   }
+
+  LOG(INFO)<<s;
+  LOG(INFO)<<"new-message-added";
+  abort();
   return s;
 }
 

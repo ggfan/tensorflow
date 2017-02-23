@@ -57,6 +57,11 @@ android {
             assets.srcDirs = ['./assets']
         }
     }
+    packagingOptions{
+        doNotStrip "*/armeabi/*.so"
+        doNotStrip "*/armeabi-v7a/*.so"
+        doNotStrip "*/x86/*.so"
+    }
 }
 
 // Download model zip file into ../../assets directory
