@@ -31,10 +31,12 @@ set_target_properties(lib_tf PROPERTIES IMPORTED_LOCATION
         ${PREBUILT_DIR}/lib/libtensorflow-core.a)
 # Change to compile flags should be replicated into bazel build file
 # LINT.IfChange
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-rtti -fno-exceptions \
-                     -fpic -O2 -mfpu=neon -D__ANDROID__ -DTF_LEAN_BINARY \
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -DIS_SLIM_BUILD -DSTANDALONE_DEMO_LIB -fno-exceptions -DNDEBUG \
+                     -fpic -O2 -mfpu=neon -Wno-narrowing -mfloat-abi=softfp -mfpu=neon -fPIE -D__ANDROID__ -DTF_LEAN_BINARY \
                      -DGOOGLE_PROTOBUF_NO_RTTI \
                      -DGOOGLE_PROTOBUF_NO_STATIC_INITIALIZER")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--allow-multiple-definition -Wl,--whole-archive -fPIE -pie -v")
+
 # LINT.ThenChange(//tensorflow/tensorflow.bzl)
 
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} \
@@ -45,7 +47,11 @@ file(GLOB tensorflow_inference_sources
      ${CMAKE_CURRENT_SOURCE_DIR}/../jni/*.cc)
 file(GLOB java_interface_sources
      ${TENSORFLOW_ROOT_DIR}/tensorflow/java/src/main/native/*.cc)
-set(c_api_sources ${TENSORFLOW_ROOT_DIR}/tensorflow/c/c_api.cc)
+set(c_api_sources
+       ${TENSORFLOW_ROOT_DIR}/tensorflow/c/c_api.cc
+       ${TENSORFLOW_ROOT_DIR}/tensorflow/c/tf_status_helper.cc
+       ${TENSORFLOW_ROOT_DIR}/tensorflow/c/checkpoint_reader.cc
+       ${TENSORFLOW_ROOT_DIR}/tensorflow/c/test_op.cc)
 
 
 add_library(tensorflow_inference SHARED

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 23
     buildToolsVersion '25.0.0'
 
     // for debugging native code purpose
@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         archivesBaseName = "Tensorflow-Android-Inference"
-        minSdkVersion 21
-        targetSdkVersion 21
+        minSdkVersion 23
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         ndk {

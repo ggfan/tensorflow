@@ -25,8 +25,8 @@ include_directories(${TF_SRC_ROOT})
 
 include_directories(${SAMPLE_SRC_DIR})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -frtti -fno-exceptions -fpic -O3 -mfpu=neon -DTF_LEAN_BINARY -DSTANDALONE_DEMO_LIB")
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--allow-multiple-definition -Wl,--whole-archive")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -DIS_SLIM_BUILD -DSTANDALONE_DEMO_LIB -fno-exceptions -DNDEBUG -fpic -O2 -Wno-narrowing -mfloat-abi=softfp -mfpu=neon -fPIE")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--allow-multiple-definition -Wl,--whole-archive -fPIE -pie -v")
 
 file(GLOB_RECURSE tensorflow_demo_sources ${SAMPLE_SRC_DIR}/jni/*.*)
 add_library(tensorflow_demo SHARED
