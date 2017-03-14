@@ -1,0 +1,88 @@
+// This file provides basic support for building the TensorFlow demo
+// in Android Studio with Gradle.
+//
+// Note:
+//    * Android Studio 2.2.0+ is used to compile the native libs,
+//      native code is built with CMake support
+//    * tensor flow models is downloaded into sample's ./assets folder
+//      or could be manually download and unzip to ./assets folder:
+//       $ curl -L https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip -o /tmp/inception5h.zip
+//       $ unzip /tmp/inception5h.zip -d tensorflow/examples/android/assets/
+apply plugin: 'com.android.application'
+
+// Sample directory: pointing to .../examples/android
+def DEMO_SRC_DIR = projectDir.toString() + "/../..";
+
+// TensorFlow repo root dir on local machine
+def TF_SRC_DIR = "${DEMO_SRC_DIR}/../../.."
+
+// import DownloadModels task
+project.ext.ASSET_DIR = projectDir.toString() + '/assets'
+project.ext.TMP_DIR   = projectDir.toString() + '/zip_tmp'
+
+apply from: "${DEMO_SRC_DIR}/download-models.gradle"
+
+// Android build scripts
+android {
+    compileSdkVersion 23
+    buildToolsVersion '25.0.0'
+
+    lintOptions {
+        abortOnError false
+    }
+
+    defaultConfig {
+        applicationId = 'com.tensorflow.demo'
+        minSdkVersion 23
+        targetSdkVersion 23
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_TOOLCHAIN=gcc', '-DANDROID_STL=gnustl_static'
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+             path 'CMakeLists.txt'
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile "${DEMO_SRC_DIR}/AndroidManifest.xml"
+            java {
+                srcDir "${DEMO_SRC_DIR}/src"
+            }
+            resources.srcDirs = ["${DEMO_SRC_DIR}/src"]
+            aidl.srcDirs = ["${DEMO_SRC_DIR}/src"]
+            renderscript.srcDirs = ["${DEMO_SRC_DIR}/src"]
+            res.srcDirs = ["${DEMO_SRC_DIR}/res"]
+            assets.srcDirs = [project.ext.ASSET_DIR]
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+// Download models... ( only need to do it first time:
+//          comment it out after it executed once)
+project.afterEvaluate {
+    assembleDebug.dependsOn downloadModels
+    assembleRelease.dependsOn downloadModels
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':Tensorflow-Android-Inference')
+//    debugCompile project(path: ':Tensorflow-Android-Inference', configuration: 'debug')
+//    releaseCompile project(path: ':Tensorflow-Android-Inference', configuration: 'release')
+}
